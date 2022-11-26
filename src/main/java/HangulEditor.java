@@ -1,41 +1,52 @@
-import editor.BackChange;
-import editor.ChangeSound;
-import editor.Separation;
+import items.HangulSplitItem;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class HangulEditor {
-    public static void main(String[] args) {
-//        Separation separation = new Separation();
-//        separation.separation("annyeonghaseyo");
-//        ChangeSound changeSound = new ChangeSound();
-//        System.out.println(changeSound.change("jalga"));
-//        File file = new File("test");
-//        File file = new File("test2");
-//        String text;
-//        int count = 1;
-//
-//        StringBuilder builder = new StringBuilder();
-//        try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
-//            while ((text = reader.readLine()) != null) {
-//                String text2 = reader.readLine();
-//                make(builder, text2, text);
-//                if (count%5 == 0) builder.append("\n");
-//                count++;
-//            }
-//        } catch (IOException ignored) {}
-//        System.out.println(builder);
+    private final static String HANGUL_REGEX = "[\u3131-\u314E\u314F-\u3163\uAC00-\uD7A3]";
+    private final static int HANGUL_START = 44032;
+    private final static int HANGUL_END = 55204;
 
-        BackChange backChange = new BackChange();
-        System.out.println(backChange.change("뙭됡"));
+    // 한글인지 확인하는 메소드
+    public static boolean isOnlyHangul(String words) {
+        return words.matches(HANGUL_REGEX + "+");
     }
 
-//    private static void make(StringBuilder builder, String text1, String text2) {
-//        builder.append("put('").append(text1).append("', \"").append(text2).append("\");");
-//        builder.append(" ");
-//    }
+    // 한글이 포함되어 있는지 확인하는 메소드
+    public static boolean isInOnlyHangul(String words) {
+        return Pattern.compile(HANGUL_REGEX).matcher(words).find();
+    }
+
+    // 한글 램던 함수
+    public static String randomHangul(int len) {
+        StringBuilder total = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            total.append((char) new Random().nextInt(HANGUL_START, HANGUL_END));
+        }
+        return total.toString();
+    }
+
+    public static String randomHangul() {
+        return randomHangul(16);
+    }
+
+    public static HangulSplitItem splitHangul(char word) {
+        return new HangulSplitItem(word);
+    }
+
+    public static List<HangulSplitItem> splitHangul(String word) {
+         return word.chars()
+                 .boxed()
+                 .map(HangulEditor::getChar)
+                 .map(HangulSplitItem::new)
+                 .toList();
+    }
+
+    private static char getChar(int i) {
+        return (char) i;
+    }
 }
