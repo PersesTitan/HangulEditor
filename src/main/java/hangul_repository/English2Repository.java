@@ -3,8 +3,8 @@ package hangul_repository;
 import java.util.HashMap;
 import java.util.Map;
 
-public interface SoundRepository {
-    Map<String, String> sound = new HashMap<>() {{
+public interface English2Repository {
+    Map<String, String> englishType2 = new HashMap<>() {{
         put("gak", "각"); put("ga", "가"); put("gan", "간"); put("gal", "갈"); put("gam", "감");
         put("gat", "갓"); put("gap", "갑"); put("gang", "강"); put("gae", "개"); put("gaek", "객");
         put("geon", "건"); put("geo", "거"); put("geol", "걸"); put("geom", "검"); put("geop", "겁");
