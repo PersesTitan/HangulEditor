@@ -1,72 +1,39 @@
 package editor;
 
-import hangul_repository.SoundRepository;
+import hangul_repository.English1Repository;
+import hangul_repository.English2Repository;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class ChangeSound implements SoundRepository {
-    private final StringBuilder builder = new StringBuilder();
-    private final Set<String> arrayList = new LinkedHashSet<>();
-    private final StringBuilder texts;
+public class ChangeSound implements English2Repository, English1Repository {
+    private static final List<Map.Entry<String, String>> list = new ArrayList<>(englishType2.entrySet()) {{
+        sort(Comparator.comparingInt(o -> o.getKey().length()));
+        Collections.reverse(this);
+    }};
 
-    public ChangeSound() {
-        texts = new StringBuilder();
-        reOrder();
-    }
+    private static final List<Map.Entry<String, String>> map = new ArrayList<>(englishType1.entrySet()) {{
+        sort(Comparator.comparingInt(o -> o.getKey().length()));
+        Collections.reverse(this);
+    }};
 
-    public void add(String eng, char kor) {
-        this.sound.put(eng, kor);
-        arrayList.add(eng);
-        reOrder();
-    }
-
-    public String change(String text) {
-        texts.setLength(0);
-        texts.append(text);
-        builder.setLength(0);
-
-        while (texts.length() != 0) {
-            boolean check = true;
-            for (String str : arrayList) {
-                if (texts.toString().startsWith(str)) {
-                    delete(str, String.valueOf(this.sound.get(str)));
-                    check = false;
-                    break;
-                }
-            }
-            if (check) delete(String.valueOf(texts.charAt(0)));
+    public static String changeType1(String total) {
+        for (Map.Entry<String, String> entry : list) {
+            if (total.contains(entry.getKey()))
+                total = total.replace(entry.getKey(), entry.getValue());
         }
-
-        return builder.toString();
+        return total;
     }
 
-    private void reOrder() {
-        int max = this.sound.keySet()
-                .stream()
-                .mapToInt(String::length)
-                .max()
-                .orElse(0);
-
-        for (int i = max; i>0; i--) {
-            int finalI = i;
-            List<String> list = this.sound
-                    .keySet()
-                    .stream()
-                    .filter(value -> value.length() == finalI)
-                    .toList();
-            arrayList.addAll(list);
+    // 국제 음성 기호
+    public static String changeType2(String total) {
+        for (Map.Entry<String, String> entry : map) {
+            if (total.contains(entry.getKey()))
+                total = total.replace(entry.getKey(), entry.getValue());
         }
+        return total;
     }
 
-    private void delete(String deleteWord, String change) {
-        builder.append(change);
-        texts.delete(0, deleteWord.length());
-    }
-
-    private void delete(String change) {
-        builder.append(change);
-        texts.delete(0, change.length());
+    private static char changeType(int i) {
+        return (char) i;
     }
 }
