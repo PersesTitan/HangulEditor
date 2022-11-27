@@ -17,6 +17,12 @@ public class HangulSplitItem implements HangulSplitTool {
     private char second;
     private char thread;
 
+    public HangulSplitItem() {
+        this.first = ' ';
+        this.second = ' ';
+        this.thread = ' ';
+    }
+
     public HangulSplitItem(char words) {
         int text = words - 0xAC00;
         int p1 = text / 28 / 21, p2 = text / 28 % 21, p3 = text % 28;
