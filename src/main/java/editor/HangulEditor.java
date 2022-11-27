@@ -1,10 +1,10 @@
+package editor;
+
 import items.HangulSplitItem;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class HangulEditor {
     private final static String HANGUL_REGEX = "[\u3131-\u314E\u314F-\u3163\uAC00-\uD7A3]";
