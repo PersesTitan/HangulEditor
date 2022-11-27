@@ -3,7 +3,7 @@ package hangul_repository;
 import java.util.HashMap;
 import java.util.Map;
 
-public interface BackRepository {
+public interface JapanRepository {
     Map<Character, String> back1 = new HashMap<>() {{
         put('첛', "ｫF"); put('첝', "ｫG"); put('첞', "ｫH"); put('첟', "ｫI"); put('첡', "ｫJ");
         put('첢', "ｫK"); put('첣', "ｫL"); put('첤', "ｫM"); put('첥', "ｫN"); put('첦', "ｫO");
