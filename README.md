@@ -96,7 +96,7 @@ System.out.println(word1.getWord());
 ## isInOnlyHangul(String)
 한글이 포함되어 있다면 true를 반환하고 false를 반환합니다.
 
-```
+```java
 System.out.println(HangulEditor.isOnlyHangul("안녕"));
 System.out.println(HangulEditor.isOnlyHangul("aa안녕"));
 
@@ -104,7 +104,7 @@ System.out.println(HangulEditor.isInOnlyHangul("aa안녕"));
 System.out.println(HangulEditor.isInOnlyHangul("abc"));
 ```
 
-```
+```java
 true
 false
 true
@@ -113,7 +113,7 @@ false
 
 ## randomHangul()
 한글을 램던으로 16자리를 반환합니다.
-```
+```java
 System.out.println(HangulEditor.randomHangul());
 ```
 ```
@@ -122,7 +122,7 @@ System.out.println(HangulEditor.randomHangul());
 
 ## randomHangul(int)
 매개변수 갯수의 길이 많큼 램던으로 반환합니다.
-```
+```java
 System.out.println(HangulEditor.randomHangul(4));
 ```
 ```
